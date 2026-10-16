@@ -17,16 +17,27 @@ html, body { overflow-x: clip; }
 /* ---------- Hero ---------- */
 .c-hero .crumbs .rec { display: inline-block; margin-right: 2px; vertical-align: 1px; }
 .c-hero figcaption { margin-top: 14px; }
-.c-hero .c-side h1 { font-size: clamp(56px, 7.2vw, 132px); line-height: .96; margin-top: 14px; }
 
-/* Vídeo de abertura: com o mouse em cima, toca sem som numa janela translúcida; o clique abre com som */
-.player .previa { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; opacity: 0; transition: opacity .6s; }
-.player.previa-on .previa { opacity: .55; }
-.player.previa-on .player-poster img { opacity: 0; }
-.player .previa-dica { position: absolute; left: 14px; bottom: 12px; z-index: 2; pointer-events: none; font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); opacity: 0; transition: opacity .4s; }
-.player.previa-on .previa-dica { opacity: 1; }
-.player.previa-on .play { opacity: .35; transform: scale(.8); transition: opacity .4s, transform .4s; }
-.c-side .c-link + .c-link { margin-left: 22px; }
+/* Abertura: título à esquerda, lado direito vazio. Com mouse, passar sobre o título faz o vídeo surgir
+   à direita, translúcido e sem som; o clique no vídeo abre com som. Em tela de toque, o vídeo fica visível abaixo. */
+.titulo-hover .c-side h1 { font-size: clamp(56px, 9vw, 168px); line-height: .94; cursor: default; }
+.c-side .c-link { margin-right: 22px; }
+.player .previa { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+.player .previa-dica { position: absolute; left: 14px; bottom: 12px; z-index: 2; pointer-events: none; font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+  .c-hero.titulo-hover { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; min-height: 86svh; padding-bottom: 24px; }
+  .titulo-hover .abertura-video { opacity: 0; transform: translateX(28px) scale(.98); pointer-events: none; transition: opacity .7s, transform .9s cubic-bezier(.2, .7, .2, 1); }
+  .titulo-hover.video-on .abertura-video, .titulo-hover.video-fixo .abertura-video { opacity: 1; transform: none; pointer-events: auto; }
+  .titulo-hover .player { background: transparent; }
+  .titulo-hover .player-poster img, .titulo-hover .player-poster .play { opacity: 0; }
+  .titulo-hover .previa { opacity: .5; transition: opacity .6s; }
+  .titulo-hover .player::after { opacity: .45; }
+  .titulo-hover.video-fixo .player { background: #000; }
+  .titulo-hover.video-fixo .player::after { opacity: 1; }
+  .titulo-hover .c-side h1 { transition: color .4s; }
+  .titulo-hover.video-on .c-side h1 { color: var(--yellow); }
+}
+@media (hover: none), (pointer: coarse), (max-width: 900px) { .player .previa-dica { display: none; } }
 
 /* ---------- Números (contadores do mockup: .exib-conta, vindo de flix.css) ---------- */
 .exib-conta { list-style: none; margin: 28px 0 0; padding: 0; display: grid; border-bottom: 1px solid var(--line); }
