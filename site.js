@@ -221,27 +221,37 @@
       corpo.replaceChildren($('template.disco-info', b.closest('li')).content.cloneNode(true));
       modal.showModal();
       modal.scrollTop = 0;
+      // o painel fica acima de tudo; o cursor próprio do mockup entra nele para continuar visível (como no lightbox)
+      $$('.cursor, .dot').forEach(c => modal.append(c));
     }));
     $('.dm-fechar', modal).addEventListener('click', () => modal.close());
     // clique fora do painel (no fundo escuro) fecha
     modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
-    modal.addEventListener('close', () => { if (origem) origem.focus(); });
+    modal.addEventListener('close', () => {
+      $$('.cursor, .dot', modal).forEach(c => document.body.append(c));
+      if (origem) origem.focus({ preventScroll: true });
+    });
   }
 
   // ---------- Discografia: quadro com as capas dos discos-marco passando (0,5 s cada) ----------
   $$('.capas-giro[data-capas]').forEach(box => {
+    // uma fila de capas quadradas que enche a largura da faixa; a cada passo todas andam uma posição
     const lista = JSON.parse(box.dataset.capas);
-    const img = $('img', box), ano = $('.giro-ano', box), nome = $('.giro-nome', box);
     lista.forEach(c => { const i = new Image(); i.src = c.src; }); // pré-carrega
-    let k = 0, timer = null;
-    const mostrar = () => { const c = lista[k]; img.src = c.src; ano.textContent = c.ano; nome.textContent = c.a + ' · ' + c.t; };
-    const passo = () => { k = (k + 1) % lista.length; mostrar(); };
-    const ligar = () => { if (!timer && !calmo) timer = setInterval(passo, 500); };
-    const desligar = () => { clearInterval(timer); timer = null; };
-    // só gira enquanto está na tela; para com o mouse em cima, para dar tempo de ler
-    new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? ligar() : desligar()))).observe(box);
-    box.addEventListener('mouseenter', desligar);
-    box.addEventListener('mouseleave', ligar);
+    let k = 0, timer = null, imgs = [];
+    const montar = () => {
+      const n = Math.min(lista.length, Math.ceil(box.clientWidth / Math.max(1, box.clientHeight)) + 1);
+      imgs = Array.from({ length: n }, (_, i) => { const im = new Image(); im.alt = ''; im.src = lista[(k + i) % lista.length].src; return im; });
+      box.replaceChildren(...imgs);
+    };
+    const passo = () => { k = (k + 1) % lista.length; imgs.forEach((im, i) => { im.src = lista[(k + i) % lista.length].src; }); };
+    montar();
+    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(montar, 200); });
+    // só gira enquanto a faixa está na tela
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !timer && !calmo) timer = setInterval(passo, 500);
+      else if (!e.isIntersecting) { clearInterval(timer); timer = null; }
+    })).observe(box);
   });
 
   // ---------- Galeria: abas por seção ----------
