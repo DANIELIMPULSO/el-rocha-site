@@ -106,7 +106,8 @@
       const max = trilho.scrollWidth - trilho.clientWidth;
       ant.disabled = trilho.scrollLeft <= 2;
       prox.disabled = trilho.scrollLeft >= max - 2;
-      const k = Math.min(itens.length - 1, Math.round(trilho.scrollLeft / passo()));
+      wrap.classList.toggle('fim', prox.disabled); // some a borda esmaecida quando chega ao último marco
+      const k = prox.disabled ? itens.length - 1 : Math.min(itens.length - 1, Math.round(trilho.scrollLeft / passo()));
       conta.textContent = dois(k + 1) + ' / ' + dois(itens.length);
     };
     [ant, prox].forEach(b => b.addEventListener('click', () => trilho.scrollBy({ left: Number(b.dataset.dir) * passo(), behavior: calmo ? 'auto' : 'smooth' })));

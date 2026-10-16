@@ -63,6 +63,22 @@ html, body { overflow-x: clip; }
 .familia .solution .mais { margin-top: 16px; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
 .familia .solution .ph { position: absolute; inset: 0; aspect-ratio: auto; border: 0; place-items: start center; padding-top: 70px; }
 .familia .pai { margin-top: 16px; min-height: 260px; }
+/* Cronologia: setas amarelas; a de avançar "empurra" para a direita enquanto ainda há marcos; borda direita esmaecida indica que continua */
+.linha-nav button:not(:disabled) { border-color: var(--yellow); color: var(--yellow); }
+.linha-nav button[data-dir="1"]:not(:disabled) { background: var(--yellow); color: #111; animation: empurra 1.4s ease-in-out infinite; }
+.linha-nav button[data-dir="1"]:not(:disabled):hover { animation: none; transform: translateX(4px); }
+@keyframes empurra { 0%, 100% { transform: none; } 50% { transform: translateX(7px); } }
+.linha-wrap::after { content: ""; position: absolute; top: 0; right: 0; bottom: 22px; width: min(18vw, 160px); pointer-events: none; background: linear-gradient(90deg, transparent, var(--bg)); transition: opacity .3s; }
+.linha-wrap.fim::after { opacity: 0; }
+/* no celular a linha rola com o dedo: sem setas, com um aviso discreto */
+@media (hover: none), (pointer: coarse) {
+  .linha-wrap .linha-nav button { display: none; }
+  .linha-wrap .linha-nav .count { margin-left: 0; }
+  .linha-nav .count::after { content: "  ·  arraste para o lado →"; color: var(--yellow); }
+  .linha-wrap.fim .linha-nav .count::after { content: ""; }
+}
+@media (prefers-reduced-motion: reduce) { .linha-nav button { animation: none !important; } }
+
 /* foto da família (frame da TV Trip, 556 px de largura: fica no tamanho original para não borrar) */
 .familia-foto { margin: 32px 0 0; max-width: 640px; }
 .familia-foto button { display: block; width: 100%; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; overflow: hidden; }
