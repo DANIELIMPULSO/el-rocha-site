@@ -211,6 +211,61 @@
       });
   }
 
+  // ---------- Discos-marco: ao clicar na capa, painel com por que o disco importa e os botões de ouvir ----------
+  const modal = $('#disco-modal');
+  if (modal) {
+    const corpo = $('.dm-corpo', modal);
+    let origem = null;
+    $$('.capas .capa-btn').forEach(b => b.addEventListener('click', () => {
+      origem = b;
+      corpo.replaceChildren($('template.disco-info', b.closest('li')).content.cloneNode(true));
+      modal.showModal();
+      modal.scrollTop = 0;
+    }));
+    $('.dm-fechar', modal).addEventListener('click', () => modal.close());
+    // clique fora do painel (no fundo escuro) fecha
+    modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+    modal.addEventListener('close', () => { if (origem) origem.focus(); });
+  }
+
+  // ---------- Discografia: quadro com as capas dos discos-marco passando (0,5 s cada) ----------
+  $$('.capas-giro[data-capas]').forEach(box => {
+    const lista = JSON.parse(box.dataset.capas);
+    const img = $('img', box), ano = $('.giro-ano', box), nome = $('.giro-nome', box);
+    lista.forEach(c => { const i = new Image(); i.src = c.src; }); // pré-carrega
+    let k = 0, timer = null;
+    const mostrar = () => { const c = lista[k]; img.src = c.src; ano.textContent = c.ano; nome.textContent = c.a + ' · ' + c.t; };
+    const passo = () => { k = (k + 1) % lista.length; mostrar(); };
+    const ligar = () => { if (!timer && !calmo) timer = setInterval(passo, 500); };
+    const desligar = () => { clearInterval(timer); timer = null; };
+    // só gira enquanto está na tela; para com o mouse em cima, para dar tempo de ler
+    new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? ligar() : desligar()))).observe(box);
+    box.addEventListener('mouseenter', desligar);
+    box.addEventListener('mouseleave', ligar);
+  });
+
+  // ---------- Galeria: abas por seção ----------
+  $$('.gal-abas').forEach(abas => {
+    const botoes = $$('button[role="tab"]', abas);
+    const abrir = b => {
+      botoes.forEach(x => {
+        const on = x === b;
+        x.setAttribute('aria-selected', on);
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+      });
+      // as fotos da aba aberta aparecem já visíveis (o .reveal não dispara em elemento que estava oculto)
+      $$('.reveal', document.getElementById(b.getAttribute('aria-controls'))).forEach(li => li.classList.add('in'));
+    };
+    botoes.forEach((b, i) => {
+      b.addEventListener('click', () => abrir(b));
+      b.addEventListener('keydown', e => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { const n = botoes[(i + d + botoes.length) % botoes.length]; n.focus(); abrir(n); }
+      });
+    });
+  });
+
   // ---------- Pesquisa: índice lateral marca a seção que está na tela ----------
   const indice = $$('.book .post-aside a[href^="#"]');
   if (indice.length && 'IntersectionObserver' in window) {
