@@ -1,0 +1,221 @@
+/* ---------- Páginas internas: Clientes, Projetos autorais e Capacitação (usam a base de style.css) ---------- */
+
+/* Abertura padrão: título de um lado, texto do outro, mídia de fundo */
+.p-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
+.p-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.04 + var(--hs, 0) * .08)); }
+.p-shade { position: absolute; inset: 0; background: radial-gradient(circle 36vmax at var(--mx, 70%) var(--my, 40%), transparent 0%, rgba(45, 45, 45, .7) 100%), linear-gradient(0deg, var(--bg) 0%, rgba(45, 45, 45, .55) 45%, rgba(45, 45, 45, .7) 100%); }
+.p-inner { position: relative; width: 100%; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: end; padding: 130px var(--gutter) clamp(40px, 7vh, 72px); opacity: calc(1 - var(--hs, 0) * .85); }
+.p-title { margin: .2em 0 0 -.02em; font: 400 clamp(44px, 6.6vw, 118px)/1.04 var(--display); text-transform: uppercase; letter-spacing: .005em; }
+.p-title span { display: block; }
+.p-title span:last-child { color: transparent; -webkit-text-stroke: 1.5px var(--yellow); }
+.p-title i { display: inline-block; font-style: normal; white-space: pre; transform-origin: 50% 100%; transform: scaleY(var(--k, 1)); transition: transform .18s ease-out; }
+.p-intro { display: grid; gap: 16px; padding-bottom: .6em; }
+.p-intro .lead { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5; color: var(--text); max-width: 44ch; }
+.p-intro strong { font-weight: 600; color: var(--yellow); }
+.p-sub { color: var(--dim); font-size: 15.5px; max-width: 46ch; }
+.p-sub strong { color: var(--text); }
+.p-intro .actions { margin-top: 10px; }
+
+/* Divisor discreto entre seções: fio fino com um traço amarelo no início */
+.rule { position: relative; margin-top: clamp(64px, 8vw, 110px); padding-top: clamp(56px, 7vw, 96px); }
+.rule::before { content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px; background: linear-gradient(90deg, var(--yellow) 0 56px, var(--line) 56px); }
+.p-hero + .rule { margin-top: clamp(24px, 4vw, 56px); }
+
+.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.sec-head .filters { margin-top: 0; }
+.count { font: 500 12.5px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+
+/* Lista numerada de pontos e etiquetas */
+.points { list-style: none; margin: 28px 0 0; padding: 0; max-width: 56ch; border-bottom: 1px solid var(--line); }
+.points li { display: flex; align-items: baseline; gap: 18px; padding: 13px 0; border-top: 1px solid var(--line); font-size: clamp(15px, 1.15vw, 17px); font-weight: 500; line-height: 1.3; opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s cubic-bezier(.2, .7, .2, 1); }
+.points span { flex: none; font: 500 12px/1 var(--mono); letter-spacing: .1em; color: var(--yellow); }
+.in .points li { opacity: 1; transform: none; }
+.in .points li:nth-child(1) { transition-delay: .25s; }
+.in .points li:nth-child(2) { transition-delay: .37s; }
+.in .points li:nth-child(3) { transition-delay: .49s; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; }
+.chips li { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); border: 1.5px solid var(--line); border-radius: 2px; padding: 10px 14px; }
+
+/* Texto + pontos em duas colunas */
+.support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 32px clamp(40px, 6vw, 96px); align-items: start; }
+.support-body > p { font-size: clamp(15.5px, 1.2vw, 17.5px); line-height: 1.65; color: #d2d0c9; max-width: 56ch; }
+.support-body .actions { margin-top: 30px; }
+
+/* Chamada final, sem palavra de fundo */
+.p-cta { margin-top: clamp(72px, 11vw, 150px); padding: clamp(56px, 8vw, 110px) var(--gutter); background: var(--surface); }
+
+/* ---------- Clientes: parede de marcas ---------- */
+.wall { position: relative; list-style: none; margin: 40px 0 0; padding: 1px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); }
+.wall::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle 280px at var(--wx, -400px) var(--wy, -400px), rgba(253, 184, 19, .16), transparent 70%); }
+.wall li { position: relative; display: grid; place-items: center; aspect-ratio: 3 / 2; background: var(--bg); transition: background .35s; }
+.wall li span { position: absolute; left: 10px; top: 9px; font: 500 10.5px/1 var(--mono); letter-spacing: .08em; color: #7d7c77; transition: color .35s; }
+.wall img { width: 46%; max-width: 110px; aspect-ratio: 1; object-fit: contain; filter: brightness(0) invert(1); opacity: .62; transition: filter .35s, opacity .35s, transform .5s cubic-bezier(.2, .7, .2, 1); }
+/* Ao passar o mouse a célula acende e a marca ganha a cor original */
+.wall li:hover { background: #f4f2ec; z-index: 1; }
+.wall li:hover img { filter: none; opacity: 1; transform: scale(1.12); }
+.wall li:hover span { color: #111; }
+
+/* ---------- Clientes: depoimentos ---------- */
+.voice-nav { display: flex; align-items: center; gap: 8px; }
+.voice-nav .count { margin-right: 10px; }
+.voice-nav button { width: 46px; height: 46px; border: 1.5px solid var(--line); border-radius: 50%; background: none; color: var(--text); font: 400 18px/1 var(--body); cursor: pointer; }
+.voice-nav button:hover { border-color: var(--yellow); color: var(--yellow); }
+.voice-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.5fr); gap: clamp(32px, 6vw, 96px); margin-top: 44px; align-items: start; }
+.voice-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.voice-list button { display: grid; grid-template-columns: 30px 1fr; gap: 2px 8px; width: 100%; padding: 12px 0; border: 0; border-top: 1px solid var(--line); background: none; color: var(--dim); text-align: left; cursor: pointer; transition: color .25s, padding .3s; }
+.voice-list b { grid-row: span 2; font: 500 11.5px/1.6 var(--mono); letter-spacing: .08em; }
+.voice-list strong { font: 500 16px/1.3 var(--body); }
+.voice-list small { font: 500 11px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+.voice-list button:hover { color: var(--text); }
+.voice-list button[aria-current="true"] { color: var(--yellow); padding-left: 12px; }
+.voice-stage { position: relative; display: grid; padding-top: 26px; }
+.voice-bar { position: absolute; left: 0; top: 0; width: 100%; height: 2px; background: var(--line); }
+.voice-bar::after { content: ""; position: absolute; inset: 0; background: var(--yellow); transform-origin: 0 50%; transform: scaleX(0); }
+.voice-stage.run .voice-bar::after { animation: voicebar var(--dur, 7s) linear forwards; }
+.voice-stage:hover .voice-bar::after { animation-play-state: paused; }
+@keyframes voicebar { to { transform: scaleX(1); } }
+.voice { grid-area: 1 / 1; margin: 0; padding-top: 26px; opacity: 0; transform: translateY(20px); transition: opacity .45s, transform .55s cubic-bezier(.2, .7, .2, 1); pointer-events: none; }
+.voice.on { opacity: 1; transform: none; pointer-events: auto; }
+.voice blockquote { margin: 0; font-size: clamp(19px, 1.9vw, 27px); line-height: 1.45; font-weight: 500; letter-spacing: -.01em; }
+.voice blockquote::before { content: "“"; display: block; font: 400 clamp(70px, 8vw, 120px)/.7 var(--display); color: var(--yellow); margin-bottom: 4px; }
+.voice figcaption { display: flex; align-items: center; gap: 14px; margin-top: 28px; font: 500 12px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.voice figcaption img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.voice figcaption b { display: block; font: 600 17px/1.3 var(--body); letter-spacing: 0; text-transform: none; color: var(--text); }
+
+/* ---------- Projetos autorais: cartazes ---------- */
+.posters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 44px 20px; margin-top: 44px; perspective: 1400px; }
+.poster { display: flex; flex-direction: column; }
+.poster[hidden] { display: none; }
+.poster-art { position: relative; display: block; aspect-ratio: 898 / 1284; background: var(--surface); overflow: hidden; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .4s; will-change: transform; }
+.poster-art img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); transition: filter .4s; }
+.poster-art i { position: absolute; inset: 0; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, .28), transparent 55%); opacity: 0; transition: opacity .3s; }
+.poster:hover .poster-art { transition-duration: .12s, .4s; box-shadow: 0 30px 60px rgba(0, 0, 0, .55); }
+.poster:hover .poster-art img { filter: none; }
+.poster:hover .poster-art i { opacity: 1; }
+.poster-meta { margin-top: 16px; font: 500 11.5px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
+.poster strong { margin-top: 6px; font: 400 clamp(22px, 2vw, 30px)/1.12 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.poster-year { margin-top: 8px; font: 500 12px/1 var(--mono); letter-spacing: .08em; color: var(--dim); }
+.poster-year.soon { align-self: flex-start; color: var(--yellow); border: 1.5px solid var(--yellow); border-radius: 2px; padding: 6px 8px; text-transform: uppercase; }
+
+.book-link { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6px 24px; }
+.book-link .eyebrow { grid-column: 1 / -1; }
+.book-link strong { font: 400 clamp(44px, 8.4vw, 136px)/1.1 var(--display); text-transform: uppercase; color: transparent; -webkit-text-stroke: 1.2px var(--yellow); transition: color .25s; }
+.book-go { font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); padding-bottom: 1.2em; }
+.book-go span { display: inline-block; transition: transform .25s; }
+.book-link:hover strong, .book-link:focus-visible strong { color: var(--yellow); }
+.book-link:hover .book-go span { transform: translateX(8px); }
+
+/* ---------- Capacitação: galeria em colunas com velocidades diferentes ---------- */
+.mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 44px; align-items: start; }
+.mosaic-col { display: grid; gap: 12px; transform: translateY(calc(var(--sy, 0) * var(--speed, 0) * 1px)); will-change: transform; }
+.mosaic-col:nth-child(1) { --speed: -.5; }
+.mosaic-col:nth-child(2) { --speed: .5; margin-top: 48px; }
+.mosaic-col:nth-child(3) { --speed: -.25; }
+.mosaic-col:nth-child(4) { --speed: .75; margin-top: 80px; }
+.mosaic button { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; overflow: hidden; }
+.mosaic-col button:nth-child(2n) { aspect-ratio: 1; }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .8; transition: filter .4s, opacity .4s, transform .8s; }
+.mosaic button:hover img, .mosaic button:focus-visible img { filter: none; opacity: 1; transform: scale(1.05); }
+
+.lightbox { padding: 0; border: 0; background: none; max-width: 94vw; max-height: 92vh; }
+.lightbox::backdrop { background: rgba(5, 5, 6, .92); }
+.lightbox img { max-width: 94vw; max-height: 84vh; }
+.lightbox button { display: block; margin: 12px auto 0; background: none; border: 1.5px solid var(--line); color: var(--text); font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 11px 16px; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .p-inner { grid-template-columns: 1fr; align-items: start; padding-top: 140px; }
+  .p-title { font-size: clamp(44px, 12.5vw, 104px); }
+  .support, .voice-grid { grid-template-columns: 1fr; }
+  .wall { grid-template-columns: repeat(3, 1fr); }
+  .voice-list { display: none; }
+  .posters { grid-template-columns: repeat(2, 1fr); gap: 32px 14px; }
+  .mosaic { grid-template-columns: repeat(2, 1fr); }
+  .mosaic-col { transform: none; }
+  .mosaic-col:nth-child(n) { margin-top: 0; }
+  .mosaic-col:nth-child(2n) { margin-top: 28px; }
+  .book-link { grid-template-columns: 1fr; }
+  .book-go { padding-bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-bg, .p-title i, .mosaic-col, .poster-art { transform: none; }
+  .p-inner { opacity: 1; }
+  .points li { opacity: 1; transform: none; }
+  .voice-bar { display: none; }
+}
+
+/* Título da abertura: palavras inteiras (sem quebra no meio) e letra menor quando a linha é comprida */
+.p-title em { display: inline-block; font-style: normal; white-space: nowrap; }
+.p-title.longo { font-size: clamp(40px, 5vw, 92px); }
+@media (max-width: 900px) { .p-title.longo { font-size: clamp(38px, 11vw, 88px); } }
+
+/* Clientes: texto do depoimento 4px menor */
+.voice blockquote { font-size: clamp(15px, calc(1.9vw - 4px), 23px); line-height: 1.5; }
+
+/* Clientes: título da parede de marcas 2px menor que os títulos de seção */
+.statement h2.menor { font-size: calc(clamp(38px, 5.6vw, 84px) - 2px); }
+
+/* Clientes, depoimento: a pessoa vem primeiro. Foto grande com anel amarelo, nome e empresa ao lado, e o texto logo abaixo */
+.voice { display: flex; flex-direction: column; }
+.voice figcaption { order: -1; gap: 22px; margin: 0 0 30px; }
+.voice figcaption img { width: clamp(88px, 7.4vw, 116px); height: clamp(88px, 7.4vw, 116px); flex: none; outline: 1.5px solid var(--yellow); outline-offset: 5px; }
+.voice figcaption b { font-size: clamp(19px, 1.5vw, 23px); margin-bottom: 4px; }
+.voice blockquote::before { font-size: clamp(48px, 4.6vw, 70px); margin-bottom: 0; }
+@media (max-width: 900px) {
+  .voice figcaption { gap: 16px; margin-bottom: 22px; }
+  .voice figcaption img { width: 76px; height: 76px; outline-offset: 4px; }
+}
+
+/* Clientes, depoimento: as fotos já trazem o próprio anel amarelo, deslocado de propósito. Sem anel extra nem recorte redondo
+   (que cortava o anel original e deixava tudo descentralizado); a foto balança de leve, como se flutuasse */
+.voice figcaption img { outline: 0; border-radius: 0; object-fit: contain; width: clamp(96px, 8vw, 128px); height: clamp(96px, 8vw, 128px); animation: voz-balanco 7s ease-in-out infinite; transform-origin: 50% 60%; }
+@keyframes voz-balanco { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2.5deg); } }
+.voice:not(.on) figcaption img { animation-play-state: paused; }
+@media (max-width: 900px) { .voice figcaption img { width: 84px; height: 84px; } }
+@media (prefers-reduced-motion: reduce) { .voice figcaption img { animation: none; } }
+
+/* Clientes, depoimento: foto e anel em camadas separadas, cada uma com o seu balanço (leve paralaxe).
+   O arquivo da foto traz um anel desenhado; aqui ele é recortado para fora (círculo de 39,3% com centro em 52,7% / 47,6%
+   da imagem, medida igual em todas as fotos) e o anel é redesenhado por cima, solto. */
+.voz-foto { position: relative; flex: none; width: clamp(92px, 7.6vw, 122px); aspect-ratio: 1; margin: 6px 10px 6px 8px; }
+.voz-foto > span { position: absolute; inset: 0; overflow: hidden; border-radius: 50%; animation: voz-foto 7s ease-in-out infinite; }
+.voice figcaption .voz-foto img { position: absolute; left: -17%; top: -10.5%; width: 127.2%; height: 127.2%; max-width: none; border-radius: 0; object-fit: fill; outline: 0; animation: none; }
+.voz-foto::after { content: ""; position: absolute; inset: -2px; border: 1.5px solid var(--yellow); border-radius: 50%; animation: voz-anel 9s ease-in-out infinite; }
+@keyframes voz-foto { 0%, 100% { transform: translate(1px, 2px); } 50% { transform: translate(-1px, -3px); } }
+@keyframes voz-anel { 0%, 100% { transform: translate(-7%, 3%); } 50% { transform: translate(-2.5%, 7.5%); } }
+.voice:not(.on) .voz-foto > span, .voice:not(.on) .voz-foto::after { animation-play-state: paused; }
+@media (max-width: 900px) { .voz-foto { width: 78px; margin: 4px 6px 4px 6px; } }
+@media (prefers-reduced-motion: reduce) { .voz-foto > span, .voz-foto::after { animation: none; } .voz-foto::after { transform: translate(-5%, 5%); } }
+
+/* Clientes: texto do depoimento em peso normal (antes 500) */
+.voice blockquote { font-weight: 400; }
+
+/* Foto ampliada: setas para passar de uma foto a outra e contador */
+.lightbox .lb-seta { position: fixed; top: 50%; display: grid; place-items: center; width: 54px; height: 54px; margin: -27px 0 0; padding: 0; border: 1.5px solid var(--line); border-radius: 50%; background: rgba(45, 45, 45, .72); color: var(--text); font: 400 20px/1 var(--body); letter-spacing: 0; cursor: pointer; }
+.lightbox .lb-seta:hover { border-color: var(--yellow); color: var(--yellow); }
+.lightbox .lb-ant { left: clamp(10px, 2.4vw, 36px); }
+.lightbox .lb-prox { right: clamp(10px, 2.4vw, 36px); }
+.lightbox .lb-conta { position: fixed; left: 0; right: 0; top: 18px; text-align: center; font: 500 12px/1 var(--mono); letter-spacing: .1em; color: var(--dim); pointer-events: none; }
+.lightbox.uma .lb-seta, .lightbox.uma .lb-conta { display: none; }
+dialog.lightbox img { max-width: min(94vw, calc(100vw - 2 * (54px + clamp(20px, 4.8vw, 72px)))); }
+@media (max-width: 900px) {
+  dialog.lightbox img { max-width: 94vw; }
+  .lightbox .lb-seta { top: auto; bottom: 16px; margin: 0; width: 48px; height: 48px; }
+}
+
+/* Cartazes: ao passar o mouse, fica claro em qual projeto a pessoa vai entrar.
+   O cartaz cresce e ganha cantos de visor, sobe uma faixa "Ver o filme", o título fica amarelo e os outros cartazes escurecem. */
+.poster { transition: opacity .35s, transform .45s cubic-bezier(.2, .7, .2, 1); }
+.poster-art::before { content: ""; position: absolute; z-index: 2; inset: 24px; opacity: 0; pointer-events: none; --c: var(--yellow); --l: 26px; --t: 2px;
+  background: linear-gradient(var(--c), var(--c)) left top / var(--l) var(--t), linear-gradient(var(--c), var(--c)) left top / var(--t) var(--l), linear-gradient(var(--c), var(--c)) right top / var(--l) var(--t), linear-gradient(var(--c), var(--c)) right top / var(--t) var(--l), linear-gradient(var(--c), var(--c)) left bottom / var(--l) var(--t), linear-gradient(var(--c), var(--c)) left bottom / var(--t) var(--l), linear-gradient(var(--c), var(--c)) right bottom / var(--l) var(--t), linear-gradient(var(--c), var(--c)) right bottom / var(--t) var(--l);
+  background-repeat: no-repeat; transition: inset .45s cubic-bezier(.2, .7, .2, 1), opacity .3s; }
+.poster-art::after { content: "Ver o filme  →"; position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 15px 16px; background: var(--yellow); color: #111; font: 600 12.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; white-space: pre; transform: translateY(101%); transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
+.poster strong { transition: color .3s; }
+@media (hover: hover) {
+  .posters:hover .poster:not(:hover):not(:focus-visible) { opacity: .38; }
+  .poster:hover, .poster:focus-visible { transform: translateY(-10px) scale(1.035); z-index: 2; }
+  .poster:hover .poster-art::before, .poster:focus-visible .poster-art::before { inset: 12px; opacity: 1; }
+  .poster:hover .poster-art::after, .poster:focus-visible .poster-art::after { transform: none; }
+  .poster:hover strong, .poster:focus-visible strong { color: var(--yellow); }
+}
+@media (prefers-reduced-motion: reduce) { .poster:hover, .poster:focus-visible { transform: none; } }

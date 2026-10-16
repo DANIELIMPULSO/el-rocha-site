@@ -1,0 +1,71 @@
+/* ---------- Página de case (usa a base de style.css) ---------- */
+
+/* 1. Filme e projeto na mesma tela: vídeo grande à esquerda, texto discreto à direita */
+.c-hero { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; padding: 104px var(--gutter) 0; }
+.player { position: relative; aspect-ratio: 16 / 9; width: 100%; background: #000; }
+.player::after { content: ""; position: absolute; inset: -10px; pointer-events: none; --c: var(--yellow); --l: 26px; --t: 1.5px;
+  background:
+    linear-gradient(var(--c), var(--c)) left top / var(--l) var(--t), linear-gradient(var(--c), var(--c)) left top / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) right top / var(--l) var(--t), linear-gradient(var(--c), var(--c)) right top / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) left bottom / var(--l) var(--t), linear-gradient(var(--c), var(--c)) left bottom / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) right bottom / var(--l) var(--t), linear-gradient(var(--c), var(--c)) right bottom / var(--t) var(--l);
+  background-repeat: no-repeat; }
+.player-poster { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; color: var(--text); cursor: pointer; overflow: hidden; }
+.player-poster img { width: 100%; height: 100%; object-fit: cover; opacity: .92; transform: translate(var(--px, 0), var(--py, 0)) scale(var(--s, 1.03)); transition: transform .6s ease-out, opacity .4s; }
+.player-poster:hover img { opacity: 1; --s: 1.07; }
+.player-poster .play { width: clamp(72px, 7vw, 104px); height: clamp(72px, 7vw, 104px); }
+.player-poster .play::after { left: 50%; top: 50%; transform: translate(-38%, -50%); }
+.player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.crumbs { display: flex; flex-wrap: wrap; gap: 10px; font: 500 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs span { color: var(--dim); }
+.c-side h1 { font: 400 clamp(44px, 5.4vw, 92px)/1 var(--display); text-transform: uppercase; letter-spacing: .005em; margin: 10px 0 18px; text-wrap: balance; overflow-wrap: anywhere; }
+.c-side p { font-size: 15px; line-height: 1.6; color: var(--dim); margin-top: 12px; }
+.c-side .c-lead { font-size: 17px; line-height: 1.5; color: var(--text); margin-top: 0; }
+.c-link { display: inline-block; margin-top: 22px; font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); padding-bottom: 6px; border-bottom: 1.5px solid var(--yellow); }
+.c-link span { display: inline-block; transition: transform .25s; }
+.c-link:hover span { transform: translateX(6px); }
+
+/* 2. Ficha técnica em faixa compacta */
+.c-credits { padding-top: clamp(48px, 6vw, 84px); }
+.c-credits dl { margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 28px; }
+.c-credits dl div { padding: 14px 0 16px; border-top: 1px solid var(--line); }
+.c-credits dt { font: 500 11.5px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.c-credits dd { margin: 4px 0 0; font-weight: 500; font-size: 15.5px; line-height: 1.4; }
+
+/* 3. Bastidores: grade simples, as fotos ampliam ao clicar */
+.shots { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.shots button { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; overflow: hidden; }
+.shots img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .8; transition: filter .4s, opacity .4s, transform .8s; }
+.shots button:hover img, .shots button:focus-visible img { filter: none; opacity: 1; transform: scale(1.05); }
+
+.lightbox { padding: 0; border: 0; background: none; max-width: 94vw; max-height: 92vh; }
+.lightbox::backdrop { background: rgba(5, 5, 6, .92); }
+.lightbox img { max-width: 94vw; max-height: 84vh; }
+.lightbox button { display: block; margin: 12px auto 0; background: none; border: 1.5px solid var(--line); color: var(--text); font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 11px 16px; cursor: pointer; }
+
+/* 4. Outros trabalhos */
+.c-related-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.related .case:first-child { grid-column: auto; grid-row: auto; aspect-ratio: 16 / 9; }
+
+/* 5. Chamada final */
+.c-cta { position: relative; margin-top: clamp(72px, 11vw, 150px); padding: clamp(56px, 8vw, 110px) var(--gutter); background: var(--surface); overflow: hidden; }
+.c-cta .statement { position: relative; }
+
+/* Seletor de opções, só para validação do mockup */
+.opts { position: fixed; left: 18px; bottom: 18px; z-index: 30; display: flex; align-items: center; gap: 4px; padding: 5px; background: rgba(56, 56, 56, .94); border: 1px solid var(--line); border-radius: 999px; font: 500 11.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.opts span { padding: 0 8px 0 10px; color: var(--dim); }
+.opts a { padding: 8px 12px; border-radius: 999px; }
+.opts a[aria-current] { background: var(--yellow); color: #111; }
+
+@media (max-width: 900px) {
+  .c-hero { grid-template-columns: 1fr; padding-top: 84px; }
+  .player::after { inset: -6px; --l: 16px; }
+  .c-side h1 { font-size: clamp(48px, 15vw, 96px); }
+  .c-credits dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots { grid-template-columns: repeat(2, 1fr); }
+  .related { grid-template-columns: 1fr; }
+  .opts span { display: none; }
+}
