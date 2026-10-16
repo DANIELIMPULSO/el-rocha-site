@@ -342,6 +342,7 @@ dialog.lightbox img { margin: 0 auto; }
 /* ---------- Tabelas fora do Book: fundo sólido para dar contraste ---------- */
 main:not(.book) .tabela { background: var(--surface); border-top: 2px solid var(--yellow); }
 main:not(.book) .tabela th { padding: 14px 16px 12px; background: rgba(0, 0, 0, .14); border-bottom-color: var(--line); }
+.tabela th { font-weight: 600; color: var(--text); }
 main:not(.book) .tabela td { padding: 13px 16px; border-bottom-color: rgba(244, 242, 236, .08); }
 main:not(.book) .tabela tbody tr:hover td { background: rgba(253, 184, 19, .05); }
 @media (max-width: 720px) {
