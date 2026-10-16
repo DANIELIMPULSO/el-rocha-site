@@ -339,6 +339,16 @@ dialog.lightbox img { margin: 0 auto; }
 @media (prefers-reduced-motion: reduce) { .af-foto, .af-grao, .af-grao2 { animation: none; } }
 .capa-cred { margin-top: 28px !important; font-size: 11px !important; opacity: .75; }
 
+/* ---------- Tabelas fora do Book: fundo sólido para dar contraste ---------- */
+main:not(.book) .tabela { background: var(--surface); border-top: 2px solid var(--yellow); }
+main:not(.book) .tabela th { padding: 14px 16px 12px; background: rgba(0, 0, 0, .14); border-bottom-color: var(--line); }
+main:not(.book) .tabela td { padding: 13px 16px; border-bottom-color: rgba(244, 242, 236, .08); }
+main:not(.book) .tabela tbody tr:hover td { background: rgba(253, 184, 19, .05); }
+@media (max-width: 720px) {
+  main:not(.book) .tabela tr { padding: 12px 16px; border-top-color: rgba(244, 242, 236, .08); }
+  main:not(.book) .tabela td { padding: 2px 0; }
+}
+
 /* ---------- Discos-marco: título no mesmo tamanho das fases ---------- */
 .capas-h { margin-top: clamp(48px, 6vw, 72px); padding-top: 20px; border-top: 1px solid var(--line); }
 .capas-h h3 { font: 400 clamp(26px, 2.6vw, 38px)/1.08 var(--display); text-transform: uppercase; }
