@@ -34,6 +34,35 @@
     new MutationObserver(atualizar).observe(img, { attributes: true, attributeFilter: ['src'] });
   }
 
+  // ---------- Vídeo de abertura: toca sem som enquanto o mouse está em cima, numa janela translúcida ----------
+  // Só em telas com mouse. O clique continua com o comportamento do mockup (pages.js): abre o vídeo com som.
+  const heroPlayer = $('.c-hero .player[data-embed]');
+  if (heroPlayer && matchMedia('(hover: hover) and (pointer: fine)').matches && !calmo) {
+    const id = heroPlayer.dataset.embed.split('/embed/')[1].split('?')[0];
+    let previa = null;
+    const comando = func => previa && previa.contentWindow && previa.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+    heroPlayer.addEventListener('mouseenter', () => {
+      if (!heroPlayer.contains($('.player-poster', heroPlayer))) return; // já foi aberto com som
+      if (!previa) {
+        previa = document.createElement('iframe');
+        previa.className = 'previa';
+        previa.title = 'Prévia sem som';
+        previa.tabIndex = -1;
+        previa.setAttribute('aria-hidden', 'true');
+        previa.allow = 'autoplay; encrypted-media';
+        previa.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+        const dica = document.createElement('span');
+        dica.className = 'previa-dica';
+        dica.textContent = 'Clique para assistir com som';
+        heroPlayer.append(previa, dica);
+      } else comando('playVideo');
+      heroPlayer.classList.add('previa-on');
+    });
+    heroPlayer.addEventListener('mouseleave', () => { heroPlayer.classList.remove('previa-on'); comando('pauseVideo'); });
+    // ao clicar, pages.js troca o conteúdo do player pelo vídeo com som; a prévia sai junto
+    heroPlayer.addEventListener('click', () => heroPlayer.classList.remove('previa-on'));
+  }
+
   // ---------- Cronologia: linha do tempo horizontal com setas e arraste ----------
   $$('.linha-wrap').forEach(wrap => {
     const trilho = $('.linha', wrap);

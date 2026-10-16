@@ -17,6 +17,15 @@ html, body { overflow-x: clip; }
 /* ---------- Hero ---------- */
 .c-hero .crumbs .rec { display: inline-block; margin-right: 2px; vertical-align: 1px; }
 .c-hero figcaption { margin-top: 14px; }
+.c-hero .c-side h1 { font-size: clamp(56px, 7.2vw, 132px); line-height: .96; margin-top: 14px; }
+
+/* Vídeo de abertura: com o mouse em cima, toca sem som numa janela translúcida; o clique abre com som */
+.player .previa { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; opacity: 0; transition: opacity .6s; }
+.player.previa-on .previa { opacity: .55; }
+.player.previa-on .player-poster img { opacity: 0; }
+.player .previa-dica { position: absolute; left: 14px; bottom: 12px; z-index: 2; pointer-events: none; font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); opacity: 0; transition: opacity .4s; }
+.player.previa-on .previa-dica { opacity: 1; }
+.player.previa-on .play { opacity: .35; transform: scale(.8); transition: opacity .4s, transform .4s; }
 .c-side .c-link + .c-link { margin-left: 22px; }
 
 /* ---------- Números (contadores do mockup: .exib-conta, vindo de flix.css) ---------- */
