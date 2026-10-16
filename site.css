@@ -156,6 +156,12 @@ html, body { overflow-x: clip; }
 .etapas span.mx { border-color: rgba(244, 242, 236, .55); }
 .etapas span.ms { background: rgba(253, 184, 19, .14); border-color: transparent; }
 .etapas small { width: 100%; font-size: 12.5px; color: var(--dim); }
+.ouvir { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabela .ouvir a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1.5px solid var(--line); border-radius: 2px; font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--text); text-decoration: none; white-space: nowrap; transition: border-color .2s, color .2s; }
+.tabela .ouvir a::before { content: ""; width: 7px; height: 7px; border-radius: 50%; }
+.tabela .ouvir a.yt::before { background: #e5382b; }
+.tabela .ouvir a.sp::before { background: #1ed760; }
+.tabela .ouvir a:hover { border-color: var(--yellow); color: var(--yellow); }
 .disco-mais { margin-top: 28px; text-align: center; }
 .disco-vazio { margin-top: 28px; color: var(--dim); }
 @media (min-width: 901px) { .disco-ctl { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } .disco-ctl .filters { grid-column: 1 / -1; } .disco-ctl .filters::before { width: auto; margin-right: 8px; } }

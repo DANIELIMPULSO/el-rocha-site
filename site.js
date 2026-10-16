@@ -158,6 +158,14 @@
       return partes.join('') + (nota ? '<small>' + esc(nota) + '</small>' : '');
     };
 
+    // Ouvir: YouTube só quando o Discogs lista um vídeo do disco; Spotify abre a busca por artista + título
+    const ouvir = d => {
+      const nome = (/^various$/i.test(d.artista) ? '' : d.artista + ' ') + d.titulo;
+      const yt = d.youtube ? '<a class="yt" href="' + esc(d.youtube) + '" target="_blank" rel="noopener" title="' + esc(d.youtube_titulo || 'Vídeo no YouTube') + '">YouTube</a>' : '';
+      const sp = '<a class="sp" href="https://open.spotify.com/search/' + encodeURIComponent(nome) + '" target="_blank" rel="noopener" title="Buscar “' + esc(nome) + '” no Spotify">Spotify</a>';
+      return yt + sp;
+    };
+
     function lista() {
       const q = sem(busca.value.trim());
       return dados.filter(d =>
@@ -173,7 +181,8 @@
         '<td data-label="Título">' + esc(d.titulo) + '</td>' +
         '<td data-label="Etapa"><span class="etapas">' + selos(d.etapa) + '</span></td>' +
         '<td data-label="Quem">' + esc(d.quem) + '</td>' +
-        '<td data-label="Fonte">' + (d.fonte ? '<a href="' + esc(d.fonte) + '" target="_blank" rel="noopener">Discogs</a>' : '—') + '</td></tr>').join('');
+        '<td data-label="Fonte">' + (d.fonte ? '<a href="' + esc(d.fonte) + '" target="_blank" rel="noopener">Discogs</a>' : '—') + '</td>' +
+        '<td data-label="Ouvir"><span class="ouvir">' + ouvir(d) + '</span></td></tr>').join('');
       conta.innerHTML = '<b>' + l.length + '</b> de ' + dados.length + ' discos';
       mais.hidden = l.length <= limite;
       mais.textContent = 'Mostrar mais ' + Math.min(POR_VEZ, l.length - limite);

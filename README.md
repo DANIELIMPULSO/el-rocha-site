@@ -10,7 +10,7 @@ Site estático do documentário "El Rocha: Sem Pedir Licença" (Impulso Filmes).
 | `personagens.html` | Biografias de Fernando Sanches e Daniel Ganjaman (com tabelas), além de Maurício e Claudio Takara |
 | `pesquisa.html` | O Book de pesquisa inteiro, com índice lateral fixo e referências ABNT no fim |
 | `el-rocha-book-pesquisa.pdf` | O Book em PDF, impresso a partir de `pesquisa.html` |
-| `discografia.json` | Os 262 discos (`ano, artista, titulo, etapa, quem, fonte`), lidos pela tabela da home |
+| `discografia.json` | Os 262 discos (`ano, artista, titulo, etapa, quem, fonte`, e `youtube`/`youtube_titulo` quando o Discogs lista um vídeo do disco), lidos pela tabela da home. O botão do Spotify abre a busca por artista + título |
 | `style.css`, `pages.css`, `case.css`, `extra.css`, `pages.js` | Copiados sem alteração do mockup da Impulso ([impulso-site-mockup](https://github.com/danielimpulso/impulso-site-mockup), commit `356cd2a`) |
 | `site.css`, `site.js` | Ajustes e componentes deste site: linha do tempo, discografia, capas, vozes, legendas e Book |
 | `img/`, `img/capas/` | Fotos, thumbnails e as 50 capas (máx. 600 px), nomeadas por artista-título |
