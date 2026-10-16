@@ -84,6 +84,18 @@
     player.addEventListener('click', () => { hero.classList.add('video-fixo'); hero.classList.remove('video-on'); }, true);
   }
 
+  // ---------- Abertura: a foto de fundo anda alguns pixels na direção oposta ao mouse (paralaxe) ----------
+  const fundo = $('.c-hero .af-parallax');
+  if (fundo && matchMedia('(hover: hover) and (pointer: fine)').matches && !calmo) {
+    const sec = fundo.closest('.c-hero');
+    sec.addEventListener('mousemove', e => {
+      const r = sec.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      fundo.style.transform = `translate(${(-x * 26).toFixed(1)}px, ${(-y * 18).toFixed(1)}px)`;
+    }, { passive: true });
+    sec.addEventListener('mouseleave', () => { fundo.style.transform = ''; });
+  }
+
   // ---------- Cronologia: linha do tempo horizontal com setas e arraste ----------
   $$('.linha-wrap').forEach(wrap => {
     const trilho = $('.linha', wrap);
