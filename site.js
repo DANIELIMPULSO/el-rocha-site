@@ -11,6 +11,7 @@
   // Com false, toda imagem marcada com data-imprensa vira um placeholder cinza (a legenda com o crédito continua).
   const MOSTRAR_FOTOS_DE_IMPRENSA = true;
   if (!MOSTRAR_FOTOS_DE_IMPRENSA) {
+    document.documentElement.classList.add('sem-imprensa'); // tira também a foto de fundo da abertura
     $$('img[data-imprensa]').forEach(img => {
       const ph = document.createElement('span');
       ph.className = 'ph';

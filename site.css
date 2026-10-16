@@ -317,6 +317,18 @@ dialog.lightbox img { margin: 0 auto; }
 .dm-fechar:hover { border-color: var(--yellow); color: var(--yellow); }
 @media (min-width: 700px) { .dm-corpo { padding-top: clamp(20px, 3vw, 36px); } .dm-grade { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); align-items: start; } .dm-texto { padding-right: 70px; } }
 
+/* ---------- Abertura: foto de fundo (sessão do Rakta) em P&B, bem transparente, com grão ---------- */
+.c-hero.titulo-hover { position: relative; isolation: isolate; }
+.c-hero.titulo-hover::before, .c-hero.titulo-hover::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.c-hero.titulo-hover::before { background: url("img/rakta-no-estudio-el-rocha-patch-notes-foto-6.jpg") 50% 60% / cover no-repeat; filter: grayscale(1) contrast(1.15); opacity: .13;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%); }
+/* grão de filme por cima da foto */
+.c-hero.titulo-hover::after { opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 70%, transparent 100%); }
+.sem-imprensa .c-hero.titulo-hover::before { display: none; }
+.capa-cred { margin-top: 28px !important; font-size: 11px !important; opacity: .75; }
+
 /* ---------- Discos-marco: título no mesmo tamanho das fases ---------- */
 .capas-h { margin-top: clamp(48px, 6vw, 72px); padding-top: 20px; border-top: 1px solid var(--line); }
 .capas-h h3 { font: 400 clamp(26px, 2.6vw, 38px)/1.08 var(--display); text-transform: uppercase; }
